@@ -1,0 +1,78 @@
+/* 
+    Document   : style
+    Created on : Jan 24, 2013, 12:41:13 PM
+    Author     : faisal
+    
+*/
+
+
+body{
+    background-color: #000;
+}
+.clear{
+    clear:both;
+}
+#wrapper{
+    
+    margin: 0 auto;
+    width: 960px;
+}
+#contentwrap{
+    background-color: #fff;
+    min-height: 200px;
+}
+header{
+      background-color: #fff6e5;
+      min-height: 100px;
+}
+.mainmenu{
+   
+
+           background-color: #7ecefd;
+}
+.mainmenu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+.mainmenu  ul li{
+        display: inline;
+        margin: 0;
+        padding: 0;
+}
+.mainmenu ul a {
+     padding: 11px 48px 11px 47px;
+      text-decoration: none;
+
+        color: #000;
+      float: left;
+      display: block;
+    text-shadow: 0.1em 0.1em 0.05em #f89d8b;
+    text-transform: uppercase;
+    height: 30px;
+    line-height: 30px;
+    border-left:1px solid #2185c5;
+}
+.mainmenu ul a:hover{
+       color: #FFFFFF;
+      background-color: #ff7f66;
+     
+}
+footer{
+      background-color: #fff6e5;
+      min-height: 100px;
+      margin: 0 auto;
+      text-align: center;
+      width: auto;
+
+}
+#logo{
+    float:left;
+    width:250px;
+    
+}
+#usermeta{
+    float:right;
+    width:250px;
+}
