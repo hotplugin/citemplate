@@ -12,22 +12,27 @@ use register\models\User;
 class Register extends MX_Controller {
 
     public function index() {
-        $this->load->helper('url');
+       $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[5]');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[5]');
         if ($this->form_validation->run() === FALSE) {
             $data['view_page'] = 'register';
-             $data['title'] = 'register';
+            $data['title'] = 'register';
+//                        $this->form_validation->set_message('required', 'Error Message');
             $this->load->view('template/master', $data);
         } else {
             $this->load->model('register/user_model', 'user');
-            //check username taken?
             $data['userrow'] = $this->user->checkUsername($this->input->post('username'));
             if (!empty($data['userrow'])) {
-                echo 'user exists';
+                echo 'user existss';
+                $this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
+                $this->form_validation->set_message('abc', 'Error Message');
+                $data['view_page'] = 'register';
+                $data['title'] = 'register';
+                $this->load->view('template/master', $data);
                 return;
             }
             $this->load->library('doctrine');
@@ -57,4 +62,5 @@ class Register extends MX_Controller {
     }
 
 }
+
 ?>
