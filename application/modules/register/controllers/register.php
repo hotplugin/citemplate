@@ -20,6 +20,7 @@ class Register extends MX_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() === FALSE) {
             $data['view_page'] = 'register';
+             $data['title'] = 'register';
             $this->load->view('template/master', $data);
         } else {
             $this->load->model('register/user_model', 'user');

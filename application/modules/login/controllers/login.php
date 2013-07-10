@@ -27,12 +27,24 @@ class Login extends MX_Controller {
         } else {
             $this->load->model('login/login_model', 'user');
             //check username taken n Password
-            $data['userrow'] = $this->user->checkUsernameNPassword($this->input->post('username'),$this->input->post('password'));
+            $data['userrow'] = $this->user->checkUsernameNPassword($this->input->post('username'), $this->input->post('password'));
             if (!empty($data['userrow'])) {
-                echo 'validated';
-                return;
-            }else{
-                echo 'invalid';
+                $this->load->library('session');
+                $newdata = array(
+                    'userid' => $data['userrow']['id'],
+                    'username' => $data['userrow']['username'],
+                    'logged_in' => TRUE
+                );
+
+                $this->session->set_userdata($newdata);
+                $data['title'] = 'Welcome';
+                $data['view_page'] = 'template/index';
+                $this->load->view('template/master', $data);
+            } else {
+
+                $data['title'] = 'Invalid login';
+                $data['view_page'] = 'login';
+                $this->load->view('template/master', $data);
             }
 //            $this->load->library('doctrine');
 //            $usernew = new register\models\User;
@@ -50,6 +62,16 @@ class Login extends MX_Controller {
 //                echo "error in data entry";
 //            }
         }
+    }
+
+    public function logout() {
+         $this->load->helper('url');
+        $this->load->library('session');
+        $this->session->unset_userdata('userid');
+        $this->session->sess_destroy();
+        $data['title'] = 'Loggout';
+        $data['view_page'] = 'login';
+        $this->load->view('template/master', $data);
     }
 
 }
